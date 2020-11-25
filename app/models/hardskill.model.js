@@ -10,8 +10,8 @@ module.exports = (sequelize, Sequelize) => {
 	});
 
 	Entiy.associate = {
-		with: ['aluno', 'questao'],
-		callback: (aluno, questao) => {
+		with: ['aluno', 'questao', 'turma', 'disciplina', 'atividade_avaliativa'],
+		callback: (aluno, questao, turma, disciplina, atividade_avaliativa) => {
 			Entiy.belongsToMany(aluno, {
 				through: 'aluno_hardskill',
 				timestamps: false,
@@ -26,6 +26,33 @@ module.exports = (sequelize, Sequelize) => {
                     name: 'id_hardskill',
                 },
                 as: 'questoes'
+			})
+
+			Entiy.belongsToMany(turma, {
+				through: 'turma_hardskill',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_hardskill'
+				},
+				as: 'turmas'
+			})
+
+			Entiy.belongsToMany(disciplina, {
+				through: 'disciplina_hardskill',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_hardskill'
+				},
+				as: 'disciplinas'
+			})
+
+			Entiy.belongsToMany(atividade_avaliativa, {
+				through: 'atividade_avaliativa_hardskill',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_hardskill'
+				},
+				as: 'atividades_avaliativas'
 			})
 
 		}

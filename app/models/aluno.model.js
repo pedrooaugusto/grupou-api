@@ -10,8 +10,8 @@ module.exports = (sequelize, Sequelize) => {
     });
 
 	Entiy.associate = {
-		with: ['usuario', 'hardskill', 'questao_dia', 'turma', 'curso', 'tarefa', 'softskill', 'grupo'],
-		callback: (usuario, hardskill, questao_dia, turma, curso, tarefa, softskills, grupo) => {
+		with: ['usuario', 'hardskill', 'questao_dia', 'turma', 'curso', 'tarefa', 'softskill', 'grupo', 'av360'],
+		callback: (usuario, hardskill, questao_dia, turma, curso, tarefa, softskills, grupo, av360) => {
             Entiy.belongsTo(usuario, {
                 foreignKey: {
                     name: 'id_usuario',
@@ -74,6 +74,13 @@ module.exports = (sequelize, Sequelize) => {
 					name: 'id_aluno'
 				},
 				as: 'grupos'
+			})
+
+			Entiy.hasMany(av360, {
+                foreignKey: {
+                    name: 'id_aluno',
+                },
+                as: 'av360s'
 			})
 		}
     }

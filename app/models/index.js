@@ -25,6 +25,9 @@ db.curso = require("./curso.model.js")(sequelize, Sequelize);
 db.tarefa = require("./tarefa.model.js")(sequelize, Sequelize);
 db.softskill = require("./softskill.model.js")(sequelize, Sequelize);
 db.grupo = require("./grupo.model.js")(sequelize, Sequelize);
+db.disciplina = require("./disciplina.model.js")(sequelize, Sequelize);
+db.atividade_avaliativa = require("./atividade_avaliativa.model.js")(sequelize, Sequelize);
+db.av360 = require("./av360.model.js")(sequelize, Sequelize);
 
 for (const key of Object.keys(db)) {
 	if (key.toLowerCase() === "sequelize") continue;

@@ -17,7 +17,16 @@ module.exports = (sequelize, Sequelize) => {
                     name: 'id_curso',
                 },
                 as: 'alunos'
-            })
+			})
+
+			Entiy.belongsToMany(turma, {
+				through: 'turma_curso',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_curso'
+				},
+				as: 'turmas'
+			})
 		}
 	}
 

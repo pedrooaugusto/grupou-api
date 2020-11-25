@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.json({ message: "API GRUPOU V.0.1" })
 });
 
-require("./app/routes/usuario.routes")(app);
+require("./app/routes/disciplina.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 

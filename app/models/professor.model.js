@@ -10,14 +10,32 @@ module.exports = (sequelize, Sequelize) => {
 	});
 
 	Entiy.associate = {
-		with: ['usuario'],
+		with: ['usuario', 'disciplina', 'turma'],
 		callback: (usuario, disciplina, turma) => {
             Entiy.belongsTo(usuario, {
                 foreignKey: {
                     name: 'id_usuario',
                 },
                 as: 'usuario'
-            })
+			})
+
+			Entiy.belongsToMany(disciplina, {
+				through: 'disciplina_professor',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_professor'
+				},
+				as: 'disciplinas'
+			})
+
+			Entiy.belongsToMany(turma, {
+				through: 'turma_professor',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_professor'
+				},
+				as: 'turmas'
+			})
 		}
 	}
 	return Entiy;

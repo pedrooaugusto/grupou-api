@@ -10,8 +10,8 @@ module.exports = (sequelize, Sequelize) => {
 	});
 
 	Entiy.associate = {
-		with: ['professor', 'aluno', 'hardskill'],
-		callback: (professor, aluno, hardskill) => {
+		with: ['professor', 'aluno', 'hardskill', 'curso', 'disciplina', 'grupo', 'atividade_avaliativa'],
+		callback: (professor, aluno, hardskill, curso, disciplina, grupo, atividade_avaliativa) => {
 
             Entiy.belongsToMany(aluno, {
 				through: 'aluno_turma',
@@ -22,6 +22,53 @@ module.exports = (sequelize, Sequelize) => {
 				as: 'alunos'
 			})
 
+            Entiy.belongsToMany(hardskill, {
+				through: 'turma_hardskill',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_turma'
+				},
+				as: 'hardskills'
+			})
+
+			Entiy.belongsToMany(professor, {
+				through: 'turma_professor',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_turma'
+				},
+				as: 'professores'
+			})
+
+			Entiy.belongsToMany(curso, {
+				through: 'turma_curso',
+				timestamps: false,
+				foreignKey: {
+					name: 'id_turma'
+				},
+				as: 'cursos'
+			})
+
+			Entiy.belongsTo(disciplina, {
+                foreignKey: {
+                    name: 'id_disciplina',
+                },
+                as: 'disciplina'
+			})
+
+			Entiy.hasMany(grupo, {
+                foreignKey: {
+                    name: 'id_turma',
+                },
+                as: 'grupos'
+			})
+			
+			Entiy.hasMany(atividade_avaliativa, {
+                foreignKey: {
+                    name: 'id_turma',
+                },
+                as: 'atividades_avaliativas'
+            })
 		}
 	}
 
